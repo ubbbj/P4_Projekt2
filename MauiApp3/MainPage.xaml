@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Watchlist.MainPage"
+             Title="Movies and TV Series">
+    <ScrollView>
+        <VerticalStackLayout Spacing="25" Padding="30">
+            <Button Text="Ustawienia" Clicked="OnSettingsClicked" />
+            <Button Text="Watchlist" Clicked="OnWatchlistClicked" />
+            <Entry x:Name="searchEntry" Placeholder="Wpisz nazwę filmu lub serialu" />
+            <Picker x:Name="mediaTypePicker" Title="Wybierz typ mediów">
+                <Picker.ItemsSource>
+                    <x:Array Type="{x:Type x:String}">
+                        <x:String>Film</x:String>
+                        <x:String>Serial</x:String>
+                    </x:Array>
+                </Picker.ItemsSource>
+            </Picker>
+            <Button Text="Szukaj" Clicked="OnSearchClicked" />
+            <CollectionView x:Name="moviesCollectionView">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <VerticalStackLayout>
+                            <Image Source="{Binding PosterPath}" Aspect="AspectFill">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="OnMovieSelected" NumberOfTapsRequired="1" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Label Text="{Binding Title}" FontAttributes="Bold" />
+                            <Label Text="{Binding Overview}" />
+                        </VerticalStackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>
